@@ -125,5 +125,3 @@ allprojects {
             
   ```
   
-###效果如图
-![image](https://github.com/MrWangChong/IosDialog/tree/master/image/iosdialog720p.gif)
