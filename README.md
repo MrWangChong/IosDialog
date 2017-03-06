@@ -14,11 +14,12 @@ allprojects {
  Step 2. Add the dependency
  ```gradle
  dependencies {
-	        compile 'com.github.MrWangChong:IosDialog:1.0.2'
+	        compile 'com.github.MrWangChong:IosDialog:1.0.4'
 	}
  ```
  
  ###用法
+ 
  和Dialog一样，在设置标题内容以及点击事件的时候，可以传入颜色来改变默认颜色值
  ```java
  IosDialog dialog = new IosDialog(this).setTitle("标题").setMessage("内容")

@@ -18,166 +18,14 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class IosDialog extends Dialog {
-    private Context mContext;
-    private String title, message, textNegativeButton, textPositiveButton;
-    private OnClickListener onClickListenerNegativeButton, onClickListenerPositiveButton;
-    private View mContentView;
-    private boolean canceledOnTouchOutside = true;
-
-    private int titleColor = -1, messageColor = -1;
-    private int negativeButtonColor = Color.parseColor("#439AFC");
-    private int positiveButtonColor = negativeButtonColor;
-
-
-    public IosDialog(Context context) {
-        super(context, R.style.IosDialog);
-        this.mContext = context;
+    private IosDialog(Context mContext, boolean canceledOnTouchOutside, View mContentView, String title, String message, int titleSize, int titleColor, int messageSize, int messageColor, OnClickListener onClickListenerNegativeButton, OnClickListener onClickListenerPositiveButton, String textNegativeButton, String textPositiveButton, int negativeButtonSize, int positiveButtonSize, int negativeButtonColor, int positiveButtonColor) {
+        super(mContext, R.style.IosDialog);
+        createDialog(mContext, canceledOnTouchOutside, mContentView, title, message, titleSize, titleColor, messageSize, messageColor,
+                onClickListenerNegativeButton, onClickListenerPositiveButton, textNegativeButton, textPositiveButton, negativeButtonSize,
+                positiveButtonSize, negativeButtonColor, positiveButtonColor);
     }
 
-    public IosDialog(Context context, int theme) {
-        super(context, theme);
-        this.mContext = context;
-    }
-
-    public IosDialog setTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
-    @Override
-    public void setTitle(int titleId) {
-//        super.setTitle(titleId);
-        this.title = getContext().getString(titleId);
-    }
-
-    public IosDialog setTitle(String title, int color) {
-        this.title = title;
-        this.titleColor = color;
-        return this;
-    }
-
-    public IosDialog setTitle(int titleId, int color) {
-        this.title = getContext().getString(titleId);
-        this.titleColor = color;
-        return this;
-    }
-
-    public IosDialog setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-
-    public IosDialog setMessage(int messageId) {
-        this.message = getContext().getString(messageId);
-        return this;
-    }
-
-    public IosDialog setMessage(String message, int color) {
-        this.message = message;
-        this.messageColor = color;
-        return this;
-    }
-
-    public IosDialog setMessage(int messageId, int color) {
-        this.message = getContext().getString(messageId);
-        this.messageColor = color;
-        return this;
-    }
-
-    /**
-     * 设置左边按钮---取消
-     */
-    public IosDialog setNegativeButton(String text, OnClickListener onClickListener) {
-        this.textNegativeButton = text;
-        this.onClickListenerNegativeButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置左边按钮---取消
-     */
-    public IosDialog setNegativeButton(int textId, OnClickListener onClickListener) {
-        this.textNegativeButton = getContext().getString(textId);
-        ;
-        this.onClickListenerNegativeButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置左边按钮---取消
-     */
-    public IosDialog setNegativeButton(String text, int color, OnClickListener onClickListener) {
-        this.textNegativeButton = text;
-        this.negativeButtonColor = color;
-        this.onClickListenerNegativeButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置左边按钮---取消
-     */
-    public IosDialog setNegativeButton(int textId, int color, OnClickListener onClickListener) {
-        this.textNegativeButton = getContext().getString(textId);
-        this.negativeButtonColor = color;
-        this.onClickListenerNegativeButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置右边按钮 ---确定
-     */
-    public IosDialog setPositiveButton(String text, OnClickListener onClickListener) {
-        this.textPositiveButton = text;
-        this.onClickListenerPositiveButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置右边按钮 ---确定
-     */
-    public IosDialog setPositiveButton(int textId, OnClickListener onClickListener) {
-        this.textPositiveButton = getContext().getString(textId);
-        this.onClickListenerPositiveButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置右边按钮 ---确定
-     */
-    public IosDialog setPositiveButton(String text, int color, OnClickListener onClickListener) {
-        this.textPositiveButton = text;
-        this.positiveButtonColor = color;
-        this.onClickListenerPositiveButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置右边按钮 ---确定
-     */
-    public IosDialog setPositiveButton(int textId, int color, OnClickListener onClickListener) {
-        this.textPositiveButton = getContext().getString(textId);
-        this.positiveButtonColor = color;
-        this.onClickListenerPositiveButton = onClickListener;
-        return this;
-    }
-
-    /**
-     * 设置能否点击外部取消弹出框
-     */
-    public IosDialog setDialogCanceledOnTouchOutside(boolean can) {
-        this.canceledOnTouchOutside = can;
-        return this;
-    }
-
-    /**
-     * 设置显示的View
-     */
-    public IosDialog setView(View v) {
-        this.mContentView = v;
-        return this;
-    }
-
-    public IosDialog createDialog() {
+    private void createDialog(Context mContext, boolean canceledOnTouchOutside, View mContentView, String title, String message, int titleSize, int titleColor, int messageSize, int messageColor, final OnClickListener onClickListenerNegativeButton, final OnClickListener onClickListenerPositiveButton, String textNegativeButton, String textPositiveButton, int negativeButtonSize, int positiveButtonSize, int negativeButtonColor, int positiveButtonColor) {
         LinearLayout layout = new LinearLayout(mContext);
         layout.setLayoutParams(new LayoutParams(dip2px(mContext, 200), LayoutParams.WRAP_CONTENT));
         // layout.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -192,7 +40,7 @@ public class IosDialog extends Dialog {
         if (!TextUtils.isEmpty(title)) {
             TextView textTitle = new TextView(mContext);
             textTitle.setText(title);
-            textTitle.setTextSize(18);
+            textTitle.setTextSize(titleSize);
             if (titleColor != -1) {
                 textTitle.setTextColor(titleColor);
             }
@@ -206,7 +54,7 @@ public class IosDialog extends Dialog {
         if (!TextUtils.isEmpty(message)) {
             TextView textMessage = new TextView(mContext);
             textMessage.setText(message);
-            textMessage.setTextSize(16);
+            textMessage.setTextSize(messageSize);
             if (messageColor != -1) {
                 textMessage.setTextColor(messageColor);
             }
@@ -234,6 +82,9 @@ public class IosDialog extends Dialog {
                 negativeButton.setTextColor(negativeButtonColor);
                 negativeButton.setBackgroundResource(R.drawable.dialog_button);
                 negativeButton.setText(textNegativeButton);
+                if(negativeButtonSize!=-1){
+                    negativeButton.setTextSize(negativeButtonSize);
+                }
                 negativeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -248,6 +99,9 @@ public class IosDialog extends Dialog {
                 negativeButton.setTextColor(negativeButtonColor);
                 negativeButton.setBackgroundResource(R.drawable.dialog_left_button);
                 negativeButton.setText(textNegativeButton);
+                if(negativeButtonSize!=-1){
+                    negativeButton.setTextSize(negativeButtonSize);
+                }
                 negativeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -261,6 +115,9 @@ public class IosDialog extends Dialog {
                 positiveButton.setTextColor(positiveButtonColor);
                 positiveButton.setBackgroundResource(R.drawable.dialog_right_button);
                 positiveButton.setText(textPositiveButton);
+                if(positiveButtonSize!=-1){
+                    positiveButton.setTextSize(positiveButtonSize);
+                }
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -277,6 +134,9 @@ public class IosDialog extends Dialog {
                 positiveButton.setTextColor(positiveButtonColor);
                 positiveButton.setBackgroundResource(R.drawable.dialog_button);
                 positiveButton.setText(textPositiveButton);
+                if(positiveButtonSize!=-1){
+                    positiveButton.setTextSize(positiveButtonSize);
+                }
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -291,7 +151,7 @@ public class IosDialog extends Dialog {
         layout.setMinimumWidth(viewWidth);
         setContentView(layout);
         setCanceledOnTouchOutside(canceledOnTouchOutside);
-        return this;
+//        return this;
     }
 
     private int dip2px(Context context, float dpValue) {
@@ -301,6 +161,145 @@ public class IosDialog extends Dialog {
 
     public interface OnClickListener {
         void onClick(IosDialog dialog, View v);
+    }
+
+    public static class Builder {
+        private Context mContext;
+        private boolean canceledOnTouchOutside = true;
+        private View mContentView;
+        //标题，内容
+        private String title, message;
+        private int titleSize = 18, titleColor = -1;
+        private int messageSize = 16, messageColor = -1;
+
+        //点击事件，按钮
+        private OnClickListener onClickListenerNegativeButton, onClickListenerPositiveButton;
+        private String textNegativeButton, textPositiveButton;
+        private int negativeButtonSize = -1, positiveButtonSize = -1;
+        private int negativeButtonColor = Color.parseColor("#439AFC");
+        private int positiveButtonColor = negativeButtonColor;
+
+        public IosDialog build() {
+            return new IosDialog(mContext, canceledOnTouchOutside, mContentView, title, message, titleSize, titleColor, messageSize, messageColor,
+                    onClickListenerNegativeButton, onClickListenerPositiveButton, textNegativeButton, textPositiveButton, negativeButtonSize,
+                    positiveButtonSize, negativeButtonColor, positiveButtonColor);
+        }
+
+        public Builder(Context context) {
+            mContext = context;
+        }
+
+        public Builder setTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder setTitle(int titleId) {
+            this.title = mContext.getString(titleId);
+            return this;
+        }
+
+        public Builder setTitleColor(int titleColor) {
+            this.titleColor = titleColor;
+            return this;
+        }
+
+        public Builder setTitleSize(int size) {
+            this.titleSize = size;
+            return this;
+        }
+
+        public Builder setMessage(String message) {
+            this.message = message;
+            return this;
+        }
+
+        public Builder setMessage(int messageId) {
+            this.message = mContext.getString(messageId);
+            return this;
+        }
+
+        public Builder setMessageSize(int size) {
+            this.messageSize = size;
+            return this;
+        }
+
+        public Builder setMessageColor(int titleColor) {
+            this.messageColor = titleColor;
+            return this;
+        }
+
+        /**
+         * 设置左边按钮---取消
+         */
+        public Builder setNegativeButton(String text, OnClickListener onClickListener) {
+            this.textNegativeButton = text;
+            this.onClickListenerNegativeButton = onClickListener;
+            return this;
+        }
+
+        /**
+         * 设置左边按钮---取消
+         */
+        public Builder setNegativeButton(int textId, OnClickListener onClickListener) {
+            this.textNegativeButton = mContext.getString(textId);
+            this.onClickListenerNegativeButton = onClickListener;
+            return this;
+        }
+
+        public Builder setNegativeButtonColor(int color) {
+            negativeButtonColor = color;
+            return this;
+        }
+
+        public Builder setNegativeButtonSize(int size) {
+            negativeButtonSize = size;
+            return this;
+        }
+
+        /**
+         * 设置右边按钮 ---确定
+         */
+        public Builder setPositiveButton(String text, OnClickListener onClickListener) {
+            this.textPositiveButton = text;
+            this.onClickListenerPositiveButton = onClickListener;
+            return this;
+        }
+
+        /**
+         * 设置右边按钮 ---确定
+         */
+        public Builder setPositiveButton(int textId, OnClickListener onClickListener) {
+            this.textPositiveButton = mContext.getString(textId);
+            this.onClickListenerPositiveButton = onClickListener;
+            return this;
+        }
+
+        public Builder setPositiveButtonColor(int color) {
+            positiveButtonColor = color;
+            return this;
+        }
+
+        public Builder setPositiveButtonSize(int size) {
+            positiveButtonSize = size;
+            return this;
+        }
+
+        /**
+         * 设置能否点击外部取消弹出框
+         */
+        public Builder setDialogCanceledOnTouchOutside(boolean can) {
+            this.canceledOnTouchOutside = can;
+            return this;
+        }
+
+        /**
+         * 设置显示的View
+         */
+        public Builder setView(View v) {
+            this.mContentView = v;
+            return this;
+        }
     }
 }
 

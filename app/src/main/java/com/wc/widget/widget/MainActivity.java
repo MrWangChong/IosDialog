@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void dialog3(View v) {
-        IosDialog dialog = new IosDialog(this).setTitle("标题", Color.RED).setMessage("内容", Color.BLUE)
-                .setNegativeButton("取消", Color.GRAY, new IosDialog.OnClickListener() {
+        IosDialog dialog = new IosDialog(this).setTitle(R.string.dialog_title, Color.RED).setMessage(R.string.dialog_message, Color.BLUE)
+                .setNegativeButton(R.string.dialog_negative, Color.GRAY, new IosDialog.OnClickListener() {
                     @Override
                     public void onClick(IosDialog dialog, View v) {
                         dialog.dismiss();
                         //doSomething
                     }
-                }).setPositiveButton("确定", Color.GREEN, new IosDialog.OnClickListener() {
+                }).setPositiveButton(R.string.dialog_positive, Color.GREEN, new IosDialog.OnClickListener() {
                     @Override
                     public void onClick(IosDialog dialog, View v) {
                         dialog.dismiss();
