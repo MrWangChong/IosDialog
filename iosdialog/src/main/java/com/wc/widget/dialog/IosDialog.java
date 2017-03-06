@@ -24,7 +24,10 @@ public class IosDialog extends Dialog {
     private View mContentView;
     private boolean canceledOnTouchOutside = true;
 
-    private int titleColor = -1;
+    private int titleColor = -1, messageColor = -1;
+    private int negativeButtonColor = Color.parseColor("#439AFC");
+    private int positiveButtonColor = negativeButtonColor;
+
 
     public IosDialog(Context context) {
         super(context, R.style.IosDialog);
@@ -52,6 +55,12 @@ public class IosDialog extends Dialog {
         return this;
     }
 
+    public IosDialog setMessage(String message, int color) {
+        this.message = message;
+        this.messageColor = color;
+        return this;
+    }
+
     /**
      * 设置左边按钮---取消
      */
@@ -62,9 +71,27 @@ public class IosDialog extends Dialog {
     }
 
     /**
+     * 设置左边按钮---取消
+     */
+    public IosDialog setNegativeButton(String text, int color, OnClickListener onClickListener) {
+        this.textNegativeButton = text;
+        this.onClickListenerNegativeButton = onClickListener;
+        return this;
+    }
+
+    /**
      * 设置右边按钮 ---确定
      */
     public IosDialog setPositiveButton(String text, OnClickListener onClickListener) {
+        this.textPositiveButton = text;
+        this.onClickListenerPositiveButton = onClickListener;
+        return this;
+    }
+
+    /**
+     * 设置右边按钮 ---确定
+     */
+    public IosDialog setPositiveButton(String text, int color, OnClickListener onClickListener) {
         this.textPositiveButton = text;
         this.onClickListenerPositiveButton = onClickListener;
         return this;
@@ -116,6 +143,9 @@ public class IosDialog extends Dialog {
             TextView textMessage = new TextView(mContext);
             textMessage.setText(message);
             textMessage.setTextSize(16);
+            if (messageColor != -1) {
+                textMessage.setTextColor(messageColor);
+            }
             textMessage.setGravity(Gravity.CENTER);
             textMessage.setPadding(dip2px(mContext, 20), dip2px(mContext, 10), dip2px(mContext, 20), 0);
             LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -137,7 +167,7 @@ public class IosDialog extends Dialog {
                 layoutButton.setOrientation(LinearLayout.VERTICAL);
                 Button negativeButton = new Button(mContext);
                 negativeButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, dip2px(mContext, 44), 1.0f));
-                negativeButton.setTextColor(Color.parseColor("#439AFC"));
+                negativeButton.setTextColor(negativeButtonColor);
                 negativeButton.setBackgroundResource(R.drawable.dialog_button);
                 negativeButton.setText(textNegativeButton);
                 negativeButton.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +181,7 @@ public class IosDialog extends Dialog {
                 layoutButton.setOrientation(LinearLayout.HORIZONTAL);
                 Button negativeButton = new Button(mContext);
                 negativeButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, dip2px(mContext, 44), 1.0f));
-                negativeButton.setTextColor(Color.parseColor("#439AFC"));
+                negativeButton.setTextColor(negativeButtonColor);
                 negativeButton.setBackgroundResource(R.drawable.dialog_left_button);
                 negativeButton.setText(textNegativeButton);
                 negativeButton.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +194,7 @@ public class IosDialog extends Dialog {
 
                 Button positiveButton = new Button(mContext);
                 positiveButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, dip2px(mContext, 44), 1.0f));
-                positiveButton.setTextColor(Color.parseColor("#439AFC"));
+                positiveButton.setTextColor(positiveButtonColor);
                 positiveButton.setBackgroundResource(R.drawable.dialog_right_button);
                 positiveButton.setText(textPositiveButton);
                 positiveButton.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +210,7 @@ public class IosDialog extends Dialog {
                 layoutButton.setOrientation(LinearLayout.VERTICAL);
                 Button positiveButton = new Button(mContext);
                 positiveButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, dip2px(mContext, 44), 1.0f));
-                positiveButton.setTextColor(Color.parseColor("#439AFC"));
+                positiveButton.setTextColor(positiveButtonColor);
                 positiveButton.setBackgroundResource(R.drawable.dialog_button);
                 positiveButton.setText(textPositiveButton);
                 positiveButton.setOnClickListener(new View.OnClickListener() {
