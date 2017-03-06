@@ -124,4 +124,4 @@ allprojects {
             dialog.show();
             
   ```
-  
+![image](https://github.com/MrWangChong/IosDialog/blob/master/img/iosdialog.gif)  
