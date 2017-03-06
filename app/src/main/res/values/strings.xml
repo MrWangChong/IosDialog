@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Widget</string>
+    <string name="dialog_title">dialog_title</string>
+    <string name="dialog_message">dialog_message</string>
+    <string name="dialog_negative">左边按钮</string>
+    <string name="dialog_positive">右边按钮</string>
 </resources>

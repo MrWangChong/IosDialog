@@ -44,8 +44,20 @@ public class IosDialog extends Dialog {
         return this;
     }
 
+    @Override
+    public void setTitle(int titleId) {
+//        super.setTitle(titleId);
+        this.title = getContext().getString(titleId);
+    }
+
     public IosDialog setTitle(String title, int color) {
         this.title = title;
+        this.titleColor = color;
+        return this;
+    }
+
+    public IosDialog setTitle(int titleId, int color) {
+        this.title = getContext().getString(titleId);
         this.titleColor = color;
         return this;
     }
@@ -55,8 +67,19 @@ public class IosDialog extends Dialog {
         return this;
     }
 
+    public IosDialog setMessage(int messageId) {
+        this.message = getContext().getString(messageId);
+        return this;
+    }
+
     public IosDialog setMessage(String message, int color) {
         this.message = message;
+        this.messageColor = color;
+        return this;
+    }
+
+    public IosDialog setMessage(int messageId, int color) {
+        this.message = getContext().getString(messageId);
         this.messageColor = color;
         return this;
     }
@@ -73,8 +96,29 @@ public class IosDialog extends Dialog {
     /**
      * 设置左边按钮---取消
      */
+    public IosDialog setNegativeButton(int textId, OnClickListener onClickListener) {
+        this.textNegativeButton = getContext().getString(textId);
+        ;
+        this.onClickListenerNegativeButton = onClickListener;
+        return this;
+    }
+
+    /**
+     * 设置左边按钮---取消
+     */
     public IosDialog setNegativeButton(String text, int color, OnClickListener onClickListener) {
         this.textNegativeButton = text;
+        this.negativeButtonColor = color;
+        this.onClickListenerNegativeButton = onClickListener;
+        return this;
+    }
+
+    /**
+     * 设置左边按钮---取消
+     */
+    public IosDialog setNegativeButton(int textId, int color, OnClickListener onClickListener) {
+        this.textNegativeButton = getContext().getString(textId);
+        this.negativeButtonColor = color;
         this.onClickListenerNegativeButton = onClickListener;
         return this;
     }
@@ -91,8 +135,28 @@ public class IosDialog extends Dialog {
     /**
      * 设置右边按钮 ---确定
      */
+    public IosDialog setPositiveButton(int textId, OnClickListener onClickListener) {
+        this.textPositiveButton = getContext().getString(textId);
+        this.onClickListenerPositiveButton = onClickListener;
+        return this;
+    }
+
+    /**
+     * 设置右边按钮 ---确定
+     */
     public IosDialog setPositiveButton(String text, int color, OnClickListener onClickListener) {
         this.textPositiveButton = text;
+        this.positiveButtonColor = color;
+        this.onClickListenerPositiveButton = onClickListener;
+        return this;
+    }
+
+    /**
+     * 设置右边按钮 ---确定
+     */
+    public IosDialog setPositiveButton(int textId, int color, OnClickListener onClickListener) {
+        this.textPositiveButton = getContext().getString(textId);
+        this.positiveButtonColor = color;
         this.onClickListenerPositiveButton = onClickListener;
         return this;
     }
