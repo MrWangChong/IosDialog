@@ -1,4 +1,5 @@
 # 高仿IosDialog 
+![](https://github.com/MrWangChong/IosDialog/tree/master/image/iosdialog720p.gif)
 使用方法和dialog一样
 ###引入
 Step 1. Add the JitPack repository to your build file
