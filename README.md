@@ -40,7 +40,7 @@ allprojects {
                  }).build();
          dialog.show();
  ```
- 也可以设置标题，内容，按钮字体颜色和大小
+ 可以设置标题，内容，按钮字体颜色和大小
  
   ```java
   //use more setting
@@ -67,7 +67,7 @@ allprojects {
                   }).build();
           dialog.show();
   ```
-也可以使用资源id设置文字
+可以使用资源id设置文字
 
   ```java
   //use resid setting
@@ -94,8 +94,7 @@ allprojects {
                   }).build();
           dialog.show();
   ```
-  
-  也可以设置显示View
+  可以设置显示的ContentView
   
   ```java
     //use ImageView as contentView
