@@ -97,7 +97,7 @@ allprojects {
   
   也可以设置显示View
   
-    ```java
+  ```java
     //use ImageView as contentView
     ImageView imageView=new ImageView(this);
             imageView.setImageResource(R.mipmap.ic_launcher);
@@ -124,4 +124,4 @@ allprojects {
                     }).build();
             dialog.show();
             
-      ```
+  ```
