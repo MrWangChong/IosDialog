@@ -7,6 +7,7 @@ package com.wc.widget.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.TextUtils;
@@ -18,8 +19,12 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class IosDialog extends Dialog {
-    private IosDialog(Context mContext, boolean canceledOnTouchOutside, View mContentView, String title, String message, int titleSize, int titleColor, int messageSize, int messageColor, OnClickListener onClickListenerNegativeButton, OnClickListener onClickListenerPositiveButton, String textNegativeButton, String textPositiveButton, int negativeButtonSize, int positiveButtonSize, int negativeButtonColor, int positiveButtonColor) {
+    private OnDialogDismissListener mOnDialogDismissListener;
+
+    private IosDialog(Context mContext, boolean canceledOnTouchOutside, View mContentView, String title, String message, int titleSize, int titleColor, int messageSize, int messageColor, OnClickListener onClickListenerNegativeButton, OnClickListener onClickListenerPositiveButton, String textNegativeButton, String textPositiveButton, int negativeButtonSize, int positiveButtonSize, int negativeButtonColor, int positiveButtonColor, OnDialogDismissListener listener) {
         super(mContext, R.style.IosDialog);
+        mOnDialogDismissListener = listener;
+        setOnDismissListener(mOnDialogDismissListener);
         createDialog(mContext, canceledOnTouchOutside, mContentView, title, message, titleSize, titleColor, messageSize, messageColor,
                 onClickListenerNegativeButton, onClickListenerPositiveButton, textNegativeButton, textPositiveButton, negativeButtonSize,
                 positiveButtonSize, negativeButtonColor, positiveButtonColor);
@@ -82,7 +87,7 @@ public class IosDialog extends Dialog {
                 negativeButton.setTextColor(negativeButtonColor);
                 negativeButton.setBackgroundResource(R.drawable.dialog_button);
                 negativeButton.setText(textNegativeButton);
-                if(negativeButtonSize!=-1){
+                if (negativeButtonSize != -1) {
                     negativeButton.setTextSize(negativeButtonSize);
                 }
                 negativeButton.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +104,7 @@ public class IosDialog extends Dialog {
                 negativeButton.setTextColor(negativeButtonColor);
                 negativeButton.setBackgroundResource(R.drawable.dialog_left_button);
                 negativeButton.setText(textNegativeButton);
-                if(negativeButtonSize!=-1){
+                if (negativeButtonSize != -1) {
                     negativeButton.setTextSize(negativeButtonSize);
                 }
                 negativeButton.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +120,7 @@ public class IosDialog extends Dialog {
                 positiveButton.setTextColor(positiveButtonColor);
                 positiveButton.setBackgroundResource(R.drawable.dialog_right_button);
                 positiveButton.setText(textPositiveButton);
-                if(positiveButtonSize!=-1){
+                if (positiveButtonSize != -1) {
                     positiveButton.setTextSize(positiveButtonSize);
                 }
                 positiveButton.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +139,7 @@ public class IosDialog extends Dialog {
                 positiveButton.setTextColor(positiveButtonColor);
                 positiveButton.setBackgroundResource(R.drawable.dialog_button);
                 positiveButton.setText(textPositiveButton);
-                if(positiveButtonSize!=-1){
+                if (positiveButtonSize != -1) {
                     positiveButton.setTextSize(positiveButtonSize);
                 }
                 positiveButton.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +168,18 @@ public class IosDialog extends Dialog {
         void onClick(IosDialog dialog, View v);
     }
 
+    public interface OnDialogDismissListener extends OnDismissListener {
+        void beforeDismiss(DialogInterface dialog);
+    }
+
+    @Override
+    public void dismiss() {
+        if (mOnDialogDismissListener != null) {
+            mOnDialogDismissListener.beforeDismiss(this);
+        }
+        super.dismiss();
+    }
+
     public static class Builder {
         private Context mContext;
         private boolean canceledOnTouchOutside = true;
@@ -179,10 +196,23 @@ public class IosDialog extends Dialog {
         private int negativeButtonColor = Color.parseColor("#439AFC");
         private int positiveButtonColor = negativeButtonColor;
 
+        private OnDialogDismissListener mOnDialogDismissListener;
+
+        private IosDialog mDialog;
+
         public IosDialog build() {
-            return new IosDialog(mContext, canceledOnTouchOutside, mContentView, title, message, titleSize, titleColor, messageSize, messageColor,
+            mDialog = new IosDialog(mContext, canceledOnTouchOutside, mContentView, title, message, titleSize, titleColor, messageSize, messageColor,
                     onClickListenerNegativeButton, onClickListenerPositiveButton, textNegativeButton, textPositiveButton, negativeButtonSize,
-                    positiveButtonSize, negativeButtonColor, positiveButtonColor);
+                    positiveButtonSize, negativeButtonColor, positiveButtonColor, mOnDialogDismissListener);
+            return mDialog;
+        }
+
+        public void show() {
+            if (mDialog == null) {
+                build();
+            }
+            mDialog.show();
+            mDialog = null;
         }
 
         public Builder(Context context) {
@@ -298,6 +328,14 @@ public class IosDialog extends Dialog {
          */
         public Builder setView(View v) {
             this.mContentView = v;
+            return this;
+        }
+
+        /**
+         * 设置Dialog消失监听
+         */
+        public Builder setOnDialogDismissListener(OnDialogDismissListener listener) {
+            this.mOnDialogDismissListener = listener;
             return this;
         }
     }

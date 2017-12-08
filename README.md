@@ -14,7 +14,7 @@ allprojects {
  Step 2. Add the dependency
  ```gradle
  dependencies {
-	        compile 'com.github.MrWangChong:IosDialog:1.0.4'
+	        compile 'com.github.MrWangChong:IosDialog:1.0.5'
 	}
  ```
  
