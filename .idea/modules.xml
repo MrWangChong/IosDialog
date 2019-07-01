@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/IosDialog.iml" filepath="$PROJECT_DIR$/.idea/IosDialog.iml" />
-      <module fileurl="file://F:\newworkspace\IosDialog\Widget.iml" filepath="F:\newworkspace\IosDialog\Widget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IosDialog.iml" filepath="$PROJECT_DIR$/IosDialog.iml" />
+      <module fileurl="file://F:/newworkspace/IosDialog/Widget.iml" filepath="F:/newworkspace/IosDialog/Widget.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://F:\newworkspace\IosDialog\app\app.iml" filepath="F:\newworkspace\IosDialog\app\app.iml" />
+      <module fileurl="file://F:/newworkspace/IosDialog/app/app.iml" filepath="F:/newworkspace/IosDialog/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/iosdialog/iosdialog.iml" filepath="$PROJECT_DIR$/iosdialog/iosdialog.iml" />
-      <module fileurl="file://F:\newworkspace\IosDialog\iosdialog\iosdialog.iml" filepath="F:\newworkspace\IosDialog\iosdialog\iosdialog.iml" />
+      <module fileurl="file://F:/newworkspace/IosDialog/iosdialog/iosdialog.iml" filepath="F:/newworkspace/IosDialog/iosdialog/iosdialog.iml" />
     </modules>
   </component>
 </project>
